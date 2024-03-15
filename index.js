@@ -43,7 +43,7 @@ export default class ModalWindow extends Controller
         let el_closer = this.element.querySelector('.modal_window_closer');
         if (!el_closer)
         {
-            el_closer = elem_create('div', {'class': 'modal_window_closer'}, 'X');
+            el_closer = elCreate('div', {'class': 'modal_window_closer'}, 'X');
             this.element.appendChild(el_closer);
             el_closer.addEventListener('click', this.close);
         }
