@@ -1,0 +1,17 @@
+/* MODAL WINDOW */
+/* ------------ */
+.modal_window_opener
+{
+	cursor: pointer;
+}
+.modal_window
+{
+	position: absolute;	visibility: hidden; z-index: 10;
+}
+.modal_window > .modal_window_closer
+{
+	cursor: pointer;
+	position: absolute;
+	right: 17px;
+	top: 13px;
+}
