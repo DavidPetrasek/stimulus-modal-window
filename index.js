@@ -1,6 +1,7 @@
 import { Controller } from '@hotwired/stimulus';
 import { elCreate } from '@dpsys/js-utils/element/util';
 import { cLog, createEnum, pause } from '@dpsys/js-utils/misc';
+import './style.css';
 
 
 var State = createEnum(['CLOSED', 'OPENED', 'OPENING', 'CLOSING']);
