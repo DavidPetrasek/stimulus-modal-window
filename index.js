@@ -101,11 +101,9 @@ export default class ModalWindow extends Controller
 	}
 
     clickOutside = (e) =>
-	{	
-        if (this.stateValue === State.CLOSED) {return;}					
-
+	{
         // ignore closest element if specified
-        var ignoreClosestFound = false;     cLog('clickOutsideIgnoreClosestQuerySelectorsValue', this.clickOutsideIgnoreClosestQuerySelectorsValue);
+        var ignoreClosestFound = false;
         this.clickOutsideIgnoreClosestQuerySelectorsValue.forEach( (ignoreQSel)=>
         {						
             cLog('ignoreQSel', ignoreQSel); 
@@ -116,6 +114,6 @@ export default class ModalWindow extends Controller
 
 		var isClickInside = this.element.contains(e.target);	//cLog('isClickInside', isClickInside, this.clickOutside);	
 		
-		if (!isClickInside) {this.close();}
+		if ( this.stateValue === State.OPENED  &&  !isClickInside ) {this.close();}
 	}	
 }
