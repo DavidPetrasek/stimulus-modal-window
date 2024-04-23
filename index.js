@@ -102,12 +102,10 @@ export default class ModalWindow extends Controller
 
     clickOutside = (e) =>
 	{
-        // ignore closest element if specified
+        // Ignore closest element if specified
         var ignoreClosestFound = false;
         this.clickOutsideIgnoreClosestQuerySelectorsValue.forEach( (ignoreQSel)=>
         {						
-            cLog('ignoreQSel', ignoreQSel); 
-            cLog('e.target.closest(ignoreQSel)', e.target.closest(ignoreQSel));
             if (e.target.closest(ignoreQSel)) {ignoreClosestFound = true;}
         });
         if (ignoreClosestFound) {return;}
