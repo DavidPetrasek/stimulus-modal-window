@@ -112,7 +112,7 @@ export default class ModalWindow extends Controller
         });
         if (ignoreClosestFound) {return;}
 
-		var isClickInside = this.element.contains(e.target);	//cLog('isClickInside', isClickInside, this.clickOutside);	
+		var isClickInside = this.element.contains(e.target);
 		
 		if ( this.stateValue === State.OPENED  &&  !isClickInside ) {this.close();}
 	}	
