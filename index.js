@@ -17,10 +17,11 @@ export default class ModalWindow extends Controller
         state: {type: String, default: State.CLOSED},
         openDurationMs: Number,
         closeDurationMs: Number,
-        multipleOpenersQuerySelector: String
+        multipleOpenersQuerySelector: String,
+        clickOutsideIgnoreClosestQuerySelectors: Array,
     }
 
-    async connect() 
+    connect() 
     {
         this.element.classList.add('modal_window');
 
@@ -54,8 +55,6 @@ export default class ModalWindow extends Controller
         }
 
         document.addEventListener('click', this.clickOutside);
-
-        if (this.connectCallback) {await this.connectCallback();}
     } 
 
     multipleOpenersCallback = (e) =>
@@ -103,6 +102,14 @@ export default class ModalWindow extends Controller
 
     clickOutside = (e) =>
 	{						
+        // ignore closest element if specified
+        var ignoreClosestFound = false;
+        this.clickOutsideIgnoreClosestQuerySelectorsValue.forEach( (ignoreQSel)=>
+        {						
+            if (e.target.closest(ignoreQSel)) {ignoreClosestFound = true;}
+        });
+        if (ignoreClosestFound) {return;}
+
 		var isClickInside = this.element.contains(e.target);	//cLog('isClickInside', isClickInside, this.clickOutside);	
 		
 		if ( this.stateValue === State.OPENED  &&  !isClickInside ) {this.close();}
