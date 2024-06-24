@@ -19,6 +19,7 @@ export default class ModalWindow extends Controller
         closeDurationMs: Number,
         multipleOpenersQuerySelector: String,
         clickOutsideIgnoreClosestQuerySelectors: Array,
+        addCloser: {type: Boolean, default: true},
     }
 
     connect() 
@@ -42,7 +43,7 @@ export default class ModalWindow extends Controller
         this.content = el_content;
 
         let el_closer = this.element.querySelector('.modal_window_closer');
-        if (!el_closer)
+        if (this.addCloserValue && !el_closer)
         {
             el_closer = elCreate('div', {'class': 'modal_window_closer'}, 'X');
             this.element.appendChild(el_closer);
