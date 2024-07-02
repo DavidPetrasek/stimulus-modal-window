@@ -28,7 +28,7 @@ This example uses Symfony, Twig and Tailwind. Use your own implementation if nee
 ```
 <button class="main" data-mw-opener-something>Open window</button>
 
-<div class="top-[15vh] right-[25vw]" {{ stimulus_controller('modal-window', {multipleOpenersQuerySelector: '[data-mw-opener-something]'}) }}>
+<div class="top-[15vh] right-[25vw]" {{ stimulus_controller('modal-window', {opener: '[data-mw-opener-something]'}) }}>
 
     <div class="modal_window_closer">X</div> // If not specified, gets created automatically only if addCloser is set to true.
 
@@ -76,10 +76,10 @@ Possible values: 'CLOSED', 'OPENED', 'OPENING', 'CLOSING'
 Openning duration in milliseconds
 ### closeDurationMs : Number
 Closing duration in milliseconds
-### multipleOpenersQuerySelector : String (required)
-Query selector for element/s which opens the window.
-### clickOutsideIgnoreClosestQuerySelectors : Array
-Query selector/s of element/s which will not close the window when clicked outside of it
+### opener : String (required)
+CSS selector of element/s which opens the window.
+### clickOutsideIgnore : Array
+CSS selector/s of clicked element/s outside current window, which will not close the window
 ### addCloser (Boolean)
 Whether to add a close button
 

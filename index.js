@@ -17,8 +17,8 @@ export default class ModalWindow extends Controller
         state: {type: String, default: State.CLOSED},
         openDurationMs: Number,
         closeDurationMs: Number,
-        multipleOpenersQuerySelector: String,
-        clickOutsideIgnoreClosestQuerySelectors: Array,
+        opener: String,
+        clickOutsideIgnore: Array,
         addCloser: {type: Boolean, default: true},
     }
 
@@ -50,9 +50,9 @@ export default class ModalWindow extends Controller
             el_closer.addEventListener('click', this.close);
         }
 
-        if (this.multipleOpenersQuerySelectorValue)
+        if (this.openerValue)
         {
-            document.addEventListener('click', this.multipleOpenersCallback);
+            document.addEventListener('click', this.openerCallback);
         }
 
         switch (this.stateValue)
@@ -68,11 +68,11 @@ export default class ModalWindow extends Controller
         }
 
         document.addEventListener('click', this.clickOutside);
-    } 
+    }
 
-    multipleOpenersCallback = (e) =>
+    openerCallback = (e) =>
     {
-        let el_opener = e.target.closest(this.multipleOpenersQuerySelectorValue); if (!el_opener) {return;}
+        let el_opener = e.target.closest(this.openerValue); if (!el_opener) {return;}
         this.opener = el_opener;
         this.open();
     }
@@ -117,9 +117,9 @@ export default class ModalWindow extends Controller
 	{
         // Ignore closest element if specified
         var ignoreClosestFound = false;
-        this.clickOutsideIgnoreClosestQuerySelectorsValue.forEach( (ignoreQSel)=>
+        this.clickOutsideIgnoreValue.forEach( (ignoreCssSel)=>
         {						
-            if (e.target.closest(ignoreQSel)) {ignoreClosestFound = true;}
+            if (e.target.closest(ignoreCssSel)) {ignoreClosestFound = true;}
         });
         if (ignoreClosestFound) {return;}
 
