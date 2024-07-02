@@ -1,5 +1,5 @@
 # Installation
-1. Register controller. This example uses vite-helpers. Use your own implementation.
+1. Register this controller. This example uses vite-helpers. Use your own implementation if needed.
 ```
 import { Application } from "@hotwired/stimulus";
 import { registerControllers } from 'stimulus-vite-helpers'
@@ -15,21 +15,20 @@ stimulusApp.register('modal-window', ModalWindow);
 
 ###
 ###
-
 # Usage
 
 ## Basic window
-This example uses Symfony, Twig and Tailwind. Use your own implementation.
+This example uses Symfony, Twig and Tailwind. Use your own implementation if needed.
 ```
 <button class="main" data-mw-opener-something>Open window</button>
 
 <div class="top-[15vh] right-[25vw]" {{ stimulus_controller('modal-window', {multipleOpenersQuerySelector: '[data-mw-opener-something]'}) }}>
 
-    <div class="modal_window_closer">X</div> // Optional
+    <div class="modal_window_closer">X</div> // If not specified, gets created automatically only if addCloser is set to true.
 
-    <div class="modal_window_content"> // Optional
+    <div class="modal_window_content"> // If not specified, gets created automatically.
         My content ...
-    </div> // Optional
+    </div>
 </div>
 ```
 
@@ -56,9 +55,14 @@ export default class extends ModalWindow
         ...															
 	}
 }
-
 ```
+## Access elements inside controller
+`this.content` - content wrapper
 
+`this.opener` - clicked element used to open current window
+
+###
+###
 # Settings
 ### state : String
 Possible values: 'CLOSED', 'OPENED', 'OPENING', 'CLOSING'
@@ -67,12 +71,14 @@ Openning duration in milliseconds
 ### closeDurationMs : Number
 Closing duration in milliseconds
 ### multipleOpenersQuerySelector : String (required)
-Query selector for element/s which opens the window. Opener element is then accessible by `this.opener`
+Query selector for element/s which opens the window.
 ### clickOutsideIgnoreClosestQuerySelectors : Array
 Query selector/s of element/s which will not close the window when clicked outside of it
 ### addCloser (Boolean)
 Whether to add a close button
 
+###
+###
 # Styling
 ```
 .modal_window.closed {opacity: 0; transition: opacity 0.5s ease-in;}

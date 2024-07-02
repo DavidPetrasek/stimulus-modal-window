@@ -55,6 +55,18 @@ export default class ModalWindow extends Controller
             document.addEventListener('click', this.multipleOpenersCallback);
         }
 
+        switch (this.stateValue)
+        {
+            case State.OPENED:
+                this.element.classList.add('opened');
+                this.element.style.visibility = 'visible';
+                break;
+            case State.CLOSED:
+                this.element.classList.add('closed');
+                this.element.style.visibility = '';
+                break;
+        }
+
         document.addEventListener('click', this.clickOutside);
     } 
 
