@@ -72,14 +72,14 @@ export default class ModalWindow extends Controller
 		if (this.openBeforeCallback) {await this.openBeforeCallback();}
 
 		this.stateValue = State.OPENING;
-        this.element.classList.add('opening');   
-        this.element.classList.remove('closed');
+        this.element.classList.add('opening');
 		this.element.style.visibility = 'visible';
 					
 		setTimeout( ()=> 
 		{
 			this.stateValue = State.OPENED;
-            this.element.classList.add('opened');   
+            this.element.classList.add('opened');
+            this.element.classList.remove('closed');   
             this.element.classList.remove('opening');
 		}
 		, this.openDurationMsValue);
@@ -90,13 +90,13 @@ export default class ModalWindow extends Controller
 		if ( this.stateValue === State.CLOSED ) {return;}					
 				
 		this.stateValue = State.CLOSING;
-        this.element.classList.add('closing');   
-        this.element.classList.remove('opened');
+        this.element.classList.add('closing');
 		
 		await pause(this.closeDurationMsValue);
 	
 		this.stateValue = State.CLOSED;
         this.element.classList.add('closed');   
+        this.element.classList.remove('opened');
         this.element.classList.remove('closing');
 		this.element.style.visibility = '';
 	}
