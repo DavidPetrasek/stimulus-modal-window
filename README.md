@@ -6,7 +6,7 @@ Submit any issues here: https://github.com/DavidPetrasek/stimulus-modal-window/i
 ###
 # Installation
 1. Register this controller. This example uses vite-helpers. Use your own implementation if needed.
-```
+``` javascript
 import { Application } from "@hotwired/stimulus";
 import { registerControllers } from 'stimulus-vite-helpers'
 import ModalWindow from "@dpsys/stimulus-modal-window";
@@ -25,7 +25,7 @@ stimulusApp.register('modal-window', ModalWindow);
 
 ## Basic window
 This example uses Symfony, Twig and Tailwind. Use your own implementation if needed.
-```
+``` html
 <button class="main" data-mw-opener-something>Open window</button>
 
 <div class="top-[15vh] right-[25vw]" {{ stimulus_controller('modal-window', {opener: '[data-mw-opener-something]'}) }}>
@@ -43,7 +43,7 @@ This example uses Symfony, Twig and Tailwind. Use your own implementation if nee
 `... {{ stimulus_controller('mw-something', ...`
 
 2. create such controller
-```
+``` javascript
 // .../controllers/mw-something-controller.js
 import ModalWindow from '@dpsys/stimulus-modal-window';
 
@@ -77,7 +77,7 @@ Openning duration in milliseconds
 ### closeDurationMs : Number
 Closing duration in milliseconds
 ### opener : String (required)
-CSS selector of element/s which opens the window.
+CSS selector of element/s which opens the window
 ### clickOutsideIgnore : Array
 CSS selector/s of clicked element/s outside current window, which will not close the window
 ### addCloser (Boolean)
@@ -86,7 +86,7 @@ Whether to add a close button
 ###
 ###
 # Styling
-```
+``` css
 .modal_window.closed {opacity: 0; transition: opacity 0.5s ease-in;}
 .modal_window.openning {opacity: 1;}
 
