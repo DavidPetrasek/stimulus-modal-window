@@ -1,6 +1,6 @@
 Install: `npm i @dpsys/stimulus-modal-window`
 
-Submit any issues here: https://github.com/DavidPetrasek/ajax-form/issues
+Submit any issues here: https://github.com/DavidPetrasek/stimulus-modal-window/issues
 
 ###
 ###
