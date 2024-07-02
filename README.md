@@ -1,3 +1,9 @@
+Install: `npm i @dpsys/stimulus-modal-window`
+
+Submit any issues here: https://github.com/DavidPetrasek/ajax-form/issues
+
+###
+###
 # Installation
 1. Register this controller. This example uses vite-helpers. Use your own implementation if needed.
 ```
