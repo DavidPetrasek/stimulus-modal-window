@@ -71,16 +71,19 @@ export default class extends ModalWindow
 ###
 # Settings
 ### state : String
-Possible values: 'CLOSED', 'OPENED', 'OPENING', 'CLOSING'
+Default state of a window on page load.
+
+Possible values: CLOSED (default), OPENED, OPENING, CLOSING
+
 ### openDurationMs : Number
 Openning duration in milliseconds
 ### closeDurationMs : Number
 Closing duration in milliseconds
-### opener : String (required)
+### opener : String
 CSS selector of element/s which opens the window
 ### clickOutsideIgnore : Array
 CSS selector/s of clicked element/s outside current window, which will not close the window
-### addCloser (Boolean)
+### addCloser : Boolean
 Whether to add a close button
 
 ###
