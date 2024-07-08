@@ -11,6 +11,7 @@ export default class ModalWindow extends Controller
 {
     opener = HTMLElement;
     content = HTMLElement;
+    closer = HTMLElement;
 
     static values = 
     {
@@ -42,12 +43,12 @@ export default class ModalWindow extends Controller
         }
         this.content = el_content;
 
-        let el_closer = this.element.querySelector('.modal_window_closer');
-        if (this.addCloserValue && !el_closer)
+        this.closer = this.element.querySelector('.modal_window_closer');
+        if (this.addCloserValue && !this.closer)
         {
-            el_closer = elCreate('div', {'class': 'modal_window_closer'}, 'X');
-            this.element.appendChild(el_closer);
-            el_closer.addEventListener('click', this.close);
+            this.closer = elCreate('div', {'class': 'modal_window_closer'}, 'X');
+            this.element.appendChild(this.closer);
+            this.closer.addEventListener('click', this.close);
         }
 
         if (this.openerValue)

@@ -62,10 +62,19 @@ export default class extends ModalWindow
 	}
 }
 ```
+
 ## Access elements inside controller
 `this.content` - content wrapper
 
 `this.opener` - clicked element used to open current window
+
+`this.closer` - closer element (available if addCloser is set to true)
+
+## Methods
+### open()
+Opens the window
+### close()
+Closes the window
 
 ###
 ###
