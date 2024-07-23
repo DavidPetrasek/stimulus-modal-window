@@ -9,9 +9,9 @@ var State = createEnum(['CLOSED', 'OPENED', 'OPENING', 'CLOSING']);
 
 export default class ModalWindow extends Controller 
 {
-    opener = HTMLElement;
-    content = HTMLElement;
-    closer = HTMLElement;
+    opener = null;
+    content = null;
+    closer = null;
 
     static values = 
     {
@@ -20,7 +20,6 @@ export default class ModalWindow extends Controller
         closeDurationMs: Number,
         opener: String,
         clickOutsideIgnore: Array,
-        addCloser: {type: Boolean, default: true},
     }
 
     connect() 
@@ -44,10 +43,8 @@ export default class ModalWindow extends Controller
         this.content = el_content;
 
         this.closer = this.element.querySelector('.modal_window_closer');
-        if (this.addCloserValue && !this.closer)
+        if (this.closer)
         {
-            this.closer = elCreate('div', {'class': 'modal_window_closer'}, 'X');
-            this.element.appendChild(this.closer);
             this.closer.addEventListener('click', this.close);
         }
 
@@ -64,7 +61,7 @@ export default class ModalWindow extends Controller
                 break;
             case State.CLOSED:
                 this.element.classList.add('closed');
-                this.element.style.visibility = '';
+                this.element.style.visibility = 'hidden';
                 break;
         }
 
@@ -111,7 +108,7 @@ export default class ModalWindow extends Controller
         this.element.classList.add('closed');   
         this.element.classList.remove('opened');
         this.element.classList.remove('closing');
-		this.element.style.visibility = '';
+		this.element.style.visibility = 'hidden';
 	}
 
     clickOutside = (e) =>

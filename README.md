@@ -30,9 +30,9 @@ This example uses Symfony, Twig and Tailwind. Use your own implementation if nee
 
 <div class="top-[15vh] right-[25vw]" {{ stimulus_controller('modal-window', {opener: '[data-mw-opener-something]'}) }}>
 
-    <div class="modal_window_closer">X</div> // If not specified, gets created automatically only if addCloser is set to true.
+    <div class="modal_window_closer">X</div> {# Optional. Specify if needed. #}
 
-    <div class="modal_window_content"> // If not specified, gets created automatically.
+    <div class="modal_window_content"> {# Optional. Gets created automatically if doesn't exist. #} 
         My content ...
     </div>
 </div>
@@ -68,7 +68,7 @@ export default class extends ModalWindow
 
 `this.opener` - clicked element used to open current window
 
-`this.closer` - closer element (available if addCloser is set to true)
+`this.closer` - closer element
 
 ## Methods
 ### open()
@@ -92,8 +92,6 @@ Closing duration in milliseconds
 CSS selector of element/s which opens the window
 ### clickOutsideIgnore : Array
 CSS selector/s of clicked element/s outside current window, which will not close the window
-### addCloser : Boolean
-Whether to add a close button
 
 ###
 ###
