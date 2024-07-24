@@ -61,7 +61,7 @@ export default class ModalWindow extends Controller
                 break;
             case State.CLOSED:
                 this.element.classList.add('closed');
-                this.element.style.visibility = 'hidden';
+                this.element.style.visibility = '';
                 break;
         }
 
@@ -108,7 +108,7 @@ export default class ModalWindow extends Controller
         this.element.classList.add('closed');   
         this.element.classList.remove('opened');
         this.element.classList.remove('closing');
-		this.element.style.visibility = 'hidden';
+		this.element.style.visibility = '';
 	}
 
     clickOutside = (e) =>

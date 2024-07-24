@@ -28,7 +28,7 @@ This example uses Symfony, Twig and Tailwind. Use your own implementation if nee
 ``` html
 <button class="main" data-mw-opener-something>Open window</button>
 
-<div class="top-[15vh] right-[25vw]" {{ stimulus_controller('modal-window', {opener: '[data-mw-opener-something]'}) }}>
+<div class="modal_window top-[15vh] right-[25vw]" {{ stimulus_controller('modal-window', {opener: '[data-mw-opener-something]'}) }}>
 
     <div class="modal_window_closer">X</div> {# Optional. Specify if needed. #}
 
@@ -104,3 +104,12 @@ CSS selector/s of clicked element/s outside current window, which will not close
 .modal_window.closing {opacity: 0;}
 
 ```
+
+###
+###
+# Troubleshooting
+
+## Flash of unstyled content on page load
+Add `modal_window` class to the main element:
+
+`<div class="`**`modal_window`**` top-[15vh] right-[25vw]" {{ stimulus_controller('modal-window', ...) }}>`
