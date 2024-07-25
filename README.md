@@ -42,7 +42,7 @@ This example uses Symfony, Twig and Tailwind. Use your own implementation if nee
 1. Choose arbitrary name for a controller
 `... {{ stimulus_controller('mw-something', ...`
 
-2. create such controller
+2. Create such controller
 ``` javascript
 // .../controllers/mw-something-controller.js
 import ModalWindow from '@dpsys/stimulus-modal-window';
