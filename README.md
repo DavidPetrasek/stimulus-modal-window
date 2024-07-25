@@ -26,7 +26,7 @@ stimulusApp.register('modal-window', ModalWindow);
 ## Basic window
 This example uses Symfony, Twig and Tailwind. Use your own implementation if needed.
 ``` html
-<button class="main" data-mw-opener-something>Open window</button>
+<button class="main" data-mw-opener-something>Open window</button>	{# Name of data attribute can be anything. E.g.: data-foo-bar  #}
 
 <div class="modal_window top-[15vh] right-[25vw]" {{ stimulus_controller('modal-window', {opener: '[data-mw-opener-something]'}) }}>
 
