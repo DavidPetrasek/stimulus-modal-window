@@ -5,6 +5,10 @@
   "main": "index.js",
   "author": "David Petrásek",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DavidPetrasek/stimulus-modal-window"
+  },
   "dependencies": {
     "@dpsys/js-utils": "^1.0.0"
   }
