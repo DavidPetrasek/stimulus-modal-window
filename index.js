@@ -91,6 +91,8 @@ export default class ModalWindow extends Controller
             this.element.classList.add('opened');
             this.element.classList.remove('closed');   
             this.element.classList.remove('opening');
+
+            if (this.openAfterCallback) {this.openAfterCallback();}
 		}
 		, this.openDurationMsValue);
 	}
@@ -99,6 +101,8 @@ export default class ModalWindow extends Controller
 	{																		
 		if ( this.stateValue === State.CLOSED ) {return;}					
 				
+        if (this.closeBeforeCallback) {await this.closeBeforeCallback();}
+
 		this.stateValue = State.CLOSING;
         this.element.classList.add('closing');
 		
@@ -109,6 +113,8 @@ export default class ModalWindow extends Controller
         this.element.classList.remove('opened');
         this.element.classList.remove('closing');
 		this.element.style.visibility = '';
+
+        if (this.closeAfterCallback) {await this.closeAfterCallback();}
 	}
 
     clickOutside = (e) =>

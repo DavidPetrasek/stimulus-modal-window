@@ -60,6 +60,11 @@ export default class extends ModalWindow
 	{	
         ...															
 	}
+
+	async openBeforeCallback()
+	{
+		alert('The window is going to open');
+	}
 }
 ```
 
@@ -76,6 +81,18 @@ Opens the window
 ### close()
 Closes the window
 
+## Callbacks
+Define these methods in your extended class if you need to execute some code when the state of the window is being changed (see example above)
+
+### openBeforeCallback()
+Do something before the window starts opening
+### openAfterCallback()
+Do something after the window finishes opening
+### closeBeforeCallback()
+Do something before the window starts closing
+### closeAfterCallback()
+Do something after the window finishes closing
+
 ###
 ###
 # Settings
@@ -85,7 +102,7 @@ Default state of a window on page load.
 Possible values: CLOSED (default), OPENED, OPENING, CLOSING
 
 ### openDurationMs : Number
-Openning duration in milliseconds
+Opening duration in milliseconds
 ### closeDurationMs : Number
 Closing duration in milliseconds
 ### opener : String
@@ -98,7 +115,7 @@ CSS selector/s of clicked element/s outside current window, which will not close
 # Styling
 ``` css
 .modal_window.closed {opacity: 0; transition: opacity 0.5s ease-in;}
-.modal_window.openning {opacity: 1;}
+.modal_window.opening {opacity: 1;}
 
 .modal_window.opened {opacity: 1; transition: opacity 0.5s ease-out;}
 .modal_window.closing {opacity: 0;}
