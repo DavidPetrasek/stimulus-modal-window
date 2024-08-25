@@ -1,9 +1,8 @@
-Install: `npm i @dpsys/stimulus-modal-window`
-
 ###
 ###
 # Installation
-1. Register this controller. This example uses vite-helpers. Use your own implementation if needed.
+1. Run: `npm i @dpsys/stimulus-modal-window`
+2. Register this controller. This example uses vite-helpers. Use your own implementation if needed.
 ``` javascript
 import { Application } from "@hotwired/stimulus";
 import { registerControllers } from 'stimulus-vite-helpers'
@@ -15,7 +14,7 @@ registerControllers(stimulusApp, stimulusControllers);
 stimulusApp.register('modal-window', ModalWindow);
 ```
 
-2. If not using bundler like vite you have to manually load style.css
+3. If not using bundler like vite you have to manually load style.css
 
 ###
 ###
