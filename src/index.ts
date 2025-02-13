@@ -1,32 +1,48 @@
 import { Controller } from '@hotwired/stimulus';
-import { elCreate } from '@dpsys/js-utils/element/util';
-import { cLog, createEnum, pause } from '@dpsys/js-utils/misc';
+import { elCreate } from '@dpsys/js-utils/el';
+import { pause } from '@dpsys/js-utils/misc';
 import './style.css';
 
-
-var State = createEnum(['CLOSED', 'OPENED', 'OPENING', 'CLOSING']);
-
-
-export default class ModalWindow extends Controller 
+enum State 
 {
-    opener = null;
-    content = null;
-    closer = null;
+    OPENING,
+    OPENED,
+    CLOSING,
+    CLOSED,
+};
 
-    static values = 
+
+export default class ModalWindow extends Controller<HTMLElement> 
+{
+    static override values = 
     {
-        state: {type: String, default: State.CLOSED},
+        state: {type: Number, default: State.CLOSED},
         openDurationMs: Number,
         closeDurationMs: Number,
         opener: String,
         clickOutsideIgnore: Array,
     }
 
-    connect() 
+    declare stateValue: State;
+    declare openDurationMsValue: number;
+    declare closeDurationMsValue: number;
+    declare openerValue: string;
+    declare clickOutsideIgnoreValue: string[];
+
+    opener : HTMLElement|null = null;
+    content : HTMLElement|null = null;
+    closer : HTMLElement|null = null;
+    openBeforeCallback : Function|null = null;
+    openAfterCallback: Function|null = null;
+    closeBeforeCallback: Function|null = null;
+    closeAfterCallback: Function|null = null;
+
+
+    override connect()
     {
         this.element.classList.add('modal_window');
 
-        let el_content = this.element.querySelector('.modal_window_content');
+        let el_content = this.element.querySelector('.modal_window_content') as HTMLElement;
         if (!el_content)
         {
             el_content = elCreate('div', {'class': 'modal_window_content'});
@@ -68,14 +84,14 @@ export default class ModalWindow extends Controller
         document.addEventListener('click', this.clickOutside);
     }
 
-    openerCallback = (e) =>
+    openerCallback = (e : Event) : void =>
     {
-        let el_opener = e.target.closest(this.openerValue); if (!el_opener) {return;}
+        let el_opener = (e.target as HTMLElement).closest(this.openerValue) as HTMLElement; if (!el_opener) {return;}
         this.opener = el_opener;
         this.open();
     }
     
-    open = async () =>
+    open = async () : Promise<void> =>
 	{        
 		if (this.stateValue === State.OPENED) {return;}	//cLog ('otevřít', null, this.open);	
 					
@@ -97,7 +113,7 @@ export default class ModalWindow extends Controller
 		, this.openDurationMsValue);
 	}
 
-    close = async () =>
+    close = async () : Promise<void> =>
 	{																		
 		if ( this.stateValue === State.CLOSED ) {return;}					
 				
@@ -117,17 +133,17 @@ export default class ModalWindow extends Controller
         if (this.closeAfterCallback) {await this.closeAfterCallback();}
 	}
 
-    clickOutside = (e) =>
+    clickOutside = (e : Event) : void =>
 	{
         // Ignore closest element if specified
         var ignoreClosestFound = false;
         this.clickOutsideIgnoreValue.forEach( (ignoreCssSel)=>
         {						
-            if (e.target.closest(ignoreCssSel)) {ignoreClosestFound = true;}
+            if ((e.target as HTMLElement).closest(ignoreCssSel)) {ignoreClosestFound = true;}
         });
         if (ignoreClosestFound) {return;}
 
-		var isClickInside = this.element.contains(e.target);
+		var isClickInside = this.element.contains(e.target as HTMLElement);
 		
 		if ( this.stateValue === State.OPENED  &&  !isClickInside ) {this.close();}
 	}	

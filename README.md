@@ -1,6 +1,11 @@
-###
-###
-# Installation
+# Stimulus Modal Window
+
+[![ISC License](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
+[![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](https://www.typescriptlang.org/)
+
+Supports CJS, ESM and TypeScript.
+
+## Installation
 1. Run: `npm i @dpsys/stimulus-modal-window`
 2. Register this controller. This example uses vite-helpers. Use your own implementation if needed.
 ``` javascript
@@ -16,11 +21,10 @@ stimulusApp.register('modal-window', ModalWindow);
 
 3. If not using bundler like vite you have to manually load style.css
 
-###
-###
-# Usage
 
-## Basic window
+## Usage
+
+### Basic window
 This example uses Symfony, Twig and Tailwind. Use your own implementation if needed.
 ``` html
 <button class="main" data-mw-opener-something>Open window</button> {# Name of data attribute can be anything. E.g.: data-foo-bar  #}
@@ -35,7 +39,7 @@ This example uses Symfony, Twig and Tailwind. Use your own implementation if nee
 </div>
 ```
 
-## If a window needs to have it's own logic
+### If a window needs to have it's own logic
 1. Choose arbitrary name for a controller
 `... {{ stimulus_controller('mw-something', ...`
 
@@ -65,7 +69,7 @@ export default class extends ModalWindow
 }
 ```
 
-## Access elements inside controller
+### Access elements inside controller
 `this.content` - content wrapper
 
 `this.opener` - clicked element used to open current window
@@ -90,9 +94,8 @@ Do something before the window starts closing
 ### closeAfterCallback()
 Do something after the window finishes closing
 
-###
-###
-# Settings
+
+## Settings
 ### state : String
 Default state of a window on page load.
 
@@ -107,9 +110,8 @@ CSS selector of element/s which opens the window
 ### clickOutsideIgnore : Array
 CSS selector/s of clicked element/s outside current window, which will not close the window
 
-###
-###
-# Styling
+
+## Styling
 ``` css
 .modal_window.closed {opacity: 0; transition: opacity 0.5s ease-in;}
 .modal_window.opening {opacity: 1;}
@@ -119,11 +121,10 @@ CSS selector/s of clicked element/s outside current window, which will not close
 
 ```
 
-###
-###
-# Troubleshooting
 
-## Flash of unstyled content on page load
+## Troubleshooting
+
+### Flash of unstyled content on page load
 Add `modal_window` class to the main element:
 
 `<div class="`**`modal_window`**` top-[15vh] right-[25vw]" {{ stimulus_controller('modal-window', ...) }}>`
