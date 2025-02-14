@@ -5,10 +5,10 @@ import './style.css';
 
 enum State 
 {
-    OPENING,
-    OPENED,
-    CLOSING,
-    CLOSED,
+    OPENING = 'OPENING',
+    OPENED = 'OPENED',
+    CLOSING = 'CLOSING',
+    CLOSED = 'CLOSED',
 };
 
 
@@ -16,7 +16,7 @@ export default class ModalWindow extends Controller<HTMLElement>
 {
     static override values = 
     {
-        state: {type: Number, default: State.CLOSED},
+        state: {type: String, default: State.CLOSED},
         openDurationMs: Number,
         closeDurationMs: Number,
         opener: String,

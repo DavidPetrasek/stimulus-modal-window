@@ -99,7 +99,7 @@ Do something after the window finishes closing
 ### state : String
 Default state of a window on page load.
 
-Possible values: CLOSED (default), OPENED, OPENING, CLOSING
+Possible values: 'CLOSED' (default), 'OPENED', 'OPENING', 'CLOSING'
 
 ### openDurationMs : Number
 Opening duration in milliseconds
