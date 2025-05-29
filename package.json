@@ -1,6 +1,6 @@
 {
   "name": "@dpsys/stimulus-modal-window",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Stimulus component for custom modal windows",
   "author": "David Petrásek",
   "license": "ISC",
