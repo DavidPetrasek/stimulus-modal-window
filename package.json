@@ -20,7 +20,7 @@
         "default": "./dist/index.js"
       }
     },
-    "./base.css": "./dist/index.css"
+    "./base.css": "./assets/base.css"
   },
   "files": [
     "dist"
