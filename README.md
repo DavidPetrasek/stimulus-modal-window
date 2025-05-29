@@ -70,7 +70,9 @@ export default class extends ModalWindow
 ```
 
 ### Access elements inside controller
-`this.content` - content wrapper
+`this.element` - the window
+
+`this.content` - content wrapper of the window
 
 `this.opener` - clicked element used to open current window
 

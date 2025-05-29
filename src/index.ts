@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus';
 import { elCreate } from '@dpsys/js-utils/el';
 import { pause } from '@dpsys/js-utils/misc';
-import './style.css';
+import './style.css';   // TODO: Needs to be manually added to index.mjs as: "import './index.css';" (https://github.com/egoist/tsup/issues/1296)
 
 enum State 
 {
@@ -32,10 +32,11 @@ export default class ModalWindow extends Controller<HTMLElement>
     opener : HTMLElement|null = null;
     content : HTMLElement|null = null;
     closer : HTMLElement|null = null;
-    openBeforeCallback : Function|null = null;
-    openAfterCallback: Function|null = null;
-    closeBeforeCallback: Function|null = null;
-    closeAfterCallback: Function|null = null;
+    
+    protected async openBeforeCallback(): Promise<void> {}
+    protected async openAfterCallback(): Promise<void> {}
+    protected async closeBeforeCallback(): Promise<void> {}
+    protected async closeAfterCallback(): Promise<void> {}
 
 
     override connect()
@@ -52,7 +53,6 @@ export default class ModalWindow extends Controller<HTMLElement>
             [...this.element.children].forEach( (el) =>
             {
                 if (el.classList.contains('modal_window_content') || el.classList.contains('modal_window_closer')) {return;}
-                // cLog('appending to content container: ', el, this.connect);
                 el_content.appendChild(el);
             })
         }
@@ -93,22 +93,22 @@ export default class ModalWindow extends Controller<HTMLElement>
     
     open = async () : Promise<void> =>
 	{        
-		if (this.stateValue === State.OPENED) {return;}	//cLog ('otevřít', null, this.open);	
+		if (this.stateValue === State.OPENED) {return;}
 					
-		if (this.openBeforeCallback) {await this.openBeforeCallback();}
+		await this.openBeforeCallback();
 
 		this.stateValue = State.OPENING;
         this.element.classList.add('opening');
 		this.element.style.visibility = 'visible';
 					
-		setTimeout( ()=> 
+		setTimeout( async ()=> 
 		{
 			this.stateValue = State.OPENED;
             this.element.classList.add('opened');
             this.element.classList.remove('closed');   
             this.element.classList.remove('opening');
 
-            if (this.openAfterCallback) {this.openAfterCallback();}
+            await this.openAfterCallback();
 		}
 		, this.openDurationMsValue);
 	}
@@ -117,7 +117,7 @@ export default class ModalWindow extends Controller<HTMLElement>
 	{																		
 		if ( this.stateValue === State.CLOSED ) {return;}					
 				
-        if (this.closeBeforeCallback) {await this.closeBeforeCallback();}
+        await this.closeBeforeCallback();
 
 		this.stateValue = State.CLOSING;
         this.element.classList.add('closing');
@@ -130,7 +130,7 @@ export default class ModalWindow extends Controller<HTMLElement>
         this.element.classList.remove('closing');
 		this.element.style.visibility = '';
 
-        if (this.closeAfterCallback) {await this.closeAfterCallback();}
+        await this.closeAfterCallback();
 	}
 
     clickOutside = (e : Event) : void =>
