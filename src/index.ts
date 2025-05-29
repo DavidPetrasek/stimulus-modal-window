@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus';
 import { elCreate } from '@dpsys/js-utils/el';
 import { pause } from '@dpsys/js-utils/misc';
-import './style.css';   // TODO: Needs to be manually added to index.mjs as: "import './index.css';" (https://github.com/egoist/tsup/issues/1296)
+
 
 enum State 
 {

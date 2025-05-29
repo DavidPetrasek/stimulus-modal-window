@@ -19,7 +19,8 @@
         "types": "./dist/index.d.ts",
         "default": "./dist/index.js"
       }
-    }
+    },
+    "./base.css": "./dist/index.css"
   },
   "files": [
     "dist"

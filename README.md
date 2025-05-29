@@ -19,7 +19,10 @@ registerControllers(stimulusApp, stimulusControllers);
 stimulusApp.register('modal-window', ModalWindow);
 ```
 
-3. If not using bundler like vite you have to manually load style.css
+3. Optional: import base CSS file
+``` javascript
+import "@dpsys/stimulus-modal-window/base.css";
+```
 
 
 ## Usage
