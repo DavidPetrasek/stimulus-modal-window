@@ -23,7 +23,8 @@
     "./base.css": "./assets/base.css"
   },
   "files": [
-    "dist"
+    "dist",
+    "assets"
   ],
   "scripts": {
     "test": "vitest --ui",
