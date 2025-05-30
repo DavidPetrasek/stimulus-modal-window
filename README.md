@@ -14,7 +14,7 @@ import ModalWindow from "@dpsys/stimulus-modal-window";
 stimulusApp.register('modal-window', ModalWindow);
 ```
 
-3. Optional: import base CSS file
+3. (Optional) Import the base CSS style:
 ``` javascript
 import "@dpsys/stimulus-modal-window/base.css";
 ```
