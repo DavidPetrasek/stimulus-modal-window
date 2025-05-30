@@ -7,15 +7,10 @@ Supports CJS, ESM and TypeScript.
 
 ## Installation
 1. Run: `npm i @dpsys/stimulus-modal-window`
-2. Register this controller. This example uses vite-helpers. Use your own implementation if needed.
+2. Register this controller in your bootstrap file:
 ``` javascript
-import { Application } from "@hotwired/stimulus";
-import { registerControllers } from 'stimulus-vite-helpers'
 import ModalWindow from "@dpsys/stimulus-modal-window";
-
-const stimulusApp = Application.start();
-const stimulusControllers = import.meta.glob('../**/*_controller.js', { eager: true })
-registerControllers(stimulusApp, stimulusControllers);
+...
 stimulusApp.register('modal-window', ModalWindow);
 ```
 
