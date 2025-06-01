@@ -72,15 +72,46 @@ export default class extends ModalWindow
 
 `this.content` - content wrapper of the window
 
-`this.opener` - clicked element used to open current window
+`this.opener` - last clicked element which opened the window
 
 `this.closer` - closer element
+
 
 ## Methods
 ### open()
 Opens the window
 ### close()
 Closes the window
+
+
+## Settings
+### state : String
+Default state of a window on page load.
+
+Possible values: 'CLOSED' (default), 'OPENED', 'OPENING', 'CLOSING'
+
+### openDurationMs : Number
+Opening duration in milliseconds
+
+Default: 0
+
+### closeDurationMs : Number
+Closing duration in milliseconds
+
+Default: 0
+
+### opener : String
+CSS selector of element/s which opens the window.
+
+If the window has its own Controller, the opener doesn't need to be specified - window can be opened/closed just programatically.
+
+Default: null
+
+### clickOutsideIgnore : Array
+CSS selector/s of clicked element/s outside window, which will not close the window
+
+Default: []
+
 
 ## Callbacks
 Define these methods in your extended class if you need to execute some code when the state of the window is being changed (see example above)
@@ -93,22 +124,6 @@ Do something after the window finishes opening
 Do something before the window starts closing
 ### closeAfterCallback()
 Do something after the window finishes closing
-
-
-## Settings
-### state : String
-Default state of a window on page load.
-
-Possible values: 'CLOSED' (default), 'OPENED', 'OPENING', 'CLOSING'
-
-### openDurationMs : Number
-Opening duration in milliseconds
-### closeDurationMs : Number
-Closing duration in milliseconds
-### opener : String
-CSS selector of element/s which opens the window
-### clickOutsideIgnore : Array
-CSS selector/s of clicked element/s outside current window, which will not close the window
 
 
 ## Styling
