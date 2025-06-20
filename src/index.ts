@@ -32,12 +32,6 @@ export default class ModalWindow extends Controller<HTMLElement>
     opener : HTMLElement|null = null;
     content : HTMLElement|null = null;
     closer : HTMLElement|null = null;
-    
-    protected async openBeforeCallback(): Promise<void> {}
-    protected async openAfterCallback(): Promise<void> {}
-    protected async closeBeforeCallback(): Promise<void> {}
-    protected async closeAfterCallback(): Promise<void> {}
-
 
     override connect()
     {
@@ -66,7 +60,7 @@ export default class ModalWindow extends Controller<HTMLElement>
 
         if (this.openerValue)
         {
-            document.addEventListener('click', this.openerCallback);
+            document.addEventListener('click', this.handleOpenerClick);
         }
 
         switch (this.stateValue)
@@ -84,7 +78,7 @@ export default class ModalWindow extends Controller<HTMLElement>
         document.addEventListener('click', this.clickOutside);
     }
 
-    openerCallback = (e : Event) : void =>
+    handleOpenerClick = (e : Event) : void =>
     {
         let el_opener = (e.target as HTMLElement).closest(this.openerValue) as HTMLElement; if (!el_opener) {return;}
         this.opener = el_opener;
@@ -95,7 +89,15 @@ export default class ModalWindow extends Controller<HTMLElement>
 	{        
 		if (this.stateValue === State.OPENED) {return;}
 					
-		await this.openBeforeCallback();
+		if ((this as any).openBeforeCallback instanceof Function)
+        {
+            console.warn('[StimulusModalWindow] ⚠️ openBeforeCallback() is deprecated and will be removed in the next minor release. Use openBefore() instead.')
+            await (this as any).openBeforeCallback();
+        }
+        else if ((this as any).openBefore instanceof Function)
+        {
+            await (this as any).openBefore();
+        }
 
 		this.stateValue = State.OPENING;
         this.element.classList.add('opening');
@@ -108,7 +110,15 @@ export default class ModalWindow extends Controller<HTMLElement>
             this.element.classList.remove('closed');   
             this.element.classList.remove('opening');
 
-            await this.openAfterCallback();
+            if ((this as any).openAfterCallback instanceof Function)
+            {
+                console.warn('[StimulusModalWindow] ⚠️ openAfterCallback() is deprecated and will be removed in the next minor release. Use openAfter() instead.')
+                await (this as any).openAfterCallback();
+            }
+            else if ((this as any).openAfter instanceof Function)
+            {
+                await (this as any).openAfter();
+            }
 		}
 		, this.openDurationMsValue);
 	}
@@ -117,7 +127,15 @@ export default class ModalWindow extends Controller<HTMLElement>
 	{																		
 		if ( this.stateValue === State.CLOSED ) {return;}					
 				
-        await this.closeBeforeCallback();
+        if ((this as any).closeBeforeCallback instanceof Function)
+        {
+            console.warn('[StimulusModalWindow] ⚠️ closeBeforeCallback() is deprecated and will be removed in the next minor release. Use closeBefore() instead.')
+            await (this as any).closeBeforeCallback();
+        }
+        else if ((this as any).closeBefore instanceof Function)
+        {
+            await (this as any).closeBefore();
+        }
 
 		this.stateValue = State.CLOSING;
         this.element.classList.add('closing');
@@ -130,7 +148,15 @@ export default class ModalWindow extends Controller<HTMLElement>
         this.element.classList.remove('closing');
 		this.element.style.visibility = '';
 
-        await this.closeAfterCallback();
+        if ((this as any).closeAfterCallback instanceof Function)
+        {
+            console.warn('[StimulusModalWindow] ⚠️ closeAfterCallback() is deprecated and will be removed in the next minor release. Use closeAfter() instead.')
+            await (this as any).closeAfterCallback();
+        }
+        else if ((this as any).closeAfter instanceof Function)
+        {
+            await (this as any).closeAfter();
+        }
 	}
 
     clickOutside = (e : Event) : void =>

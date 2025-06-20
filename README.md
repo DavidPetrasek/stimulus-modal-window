@@ -60,7 +60,7 @@ export default class extends ModalWindow
         ...															
 	}
 
-	async openBeforeCallback()
+	async openBefore()
 	{
 		alert('The window is going to open');
 	}
@@ -116,13 +116,13 @@ Default: []
 ## Callbacks
 Define these methods in your extended class if you need to execute some code when the state of the window is being changed (see example above)
 
-### openBeforeCallback()
+### openBefore()
 Do something before the window starts opening
-### openAfterCallback()
+### openAfter()
 Do something after the window finishes opening
-### closeBeforeCallback()
+### closeBefore()
 Do something before the window starts closing
-### closeAfterCallback()
+### closeAfter()
 Do something after the window finishes closing
 
 
