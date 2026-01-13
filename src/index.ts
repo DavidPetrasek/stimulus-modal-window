@@ -91,7 +91,7 @@ export default class ModalWindow extends Controller<HTMLElement>
 					
 		if ((this as any).openBeforeCallback instanceof Function)
         {
-            console.warn('[StimulusModalWindow] ⚠️ openBeforeCallback() is deprecated and will be removed in the next minor release. Use openBefore() instead.')
+            console.warn('[StimulusModalWindow] ⚠️ openBeforeCallback() is deprecated and will be removed in the next minor release. Use openBefore() instead.');
             await (this as any).openBeforeCallback();
         }
         else if ((this as any).openBefore instanceof Function)

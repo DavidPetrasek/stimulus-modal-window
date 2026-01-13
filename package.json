@@ -1,7 +1,14 @@
 {
   "name": "@dpsys/stimulus-modal-window",
   "version": "1.4.6",
-  "description": "Stimulus component for custom modal windows",
+  "description": "Custom modal windows for Stimulus framework",
+  "keywords": [
+    "modal-window",
+    "modal-windows",
+    "stimulusjs",
+    "stimulus-js",
+    "stimulus-controller"
+  ],
   "author": "David Petrásek",
   "license": "ISC",
   "repository": {
