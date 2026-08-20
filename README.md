@@ -9,14 +9,14 @@ Supports CJS, ESM and TypeScript.
 ## Installation
 1. Run: `npm i @dpsys/stimulus-modal-window`
 2. Register this controller in your bootstrap file:
-``` javascript
+``` js
 import ModalWindow from "@dpsys/stimulus-modal-window";
 ...
 stimulusApp.register('modal-window', ModalWindow);
 ```
 
 3. (Optional) Import the base CSS style:
-``` javascript
+``` js
 import "@dpsys/stimulus-modal-window/base.css";
 ```
 
@@ -25,7 +25,7 @@ import "@dpsys/stimulus-modal-window/base.css";
 
 ### Basic window
 This example uses Symfony, Twig and Tailwind. Use your own implementation if needed.
-``` html
+``` twig
 <button class="main" data-mw-opener-something>Open window</button> {# Name of data attribute can be anything. E.g.: data-foo-bar  #}
 
 <div class="modal_window top-[15vh] right-[25vw]" {{ stimulus_controller('modal-window', {opener: '[data-mw-opener-something]'}) }}>
@@ -43,7 +43,7 @@ This example uses Symfony, Twig and Tailwind. Use your own implementation if nee
 `... {{ stimulus_controller('mw-something', ...`
 
 2. Create such controller
-``` javascript
+``` js
 // .../controllers/mw-something-controller.js
 import ModalWindow from '@dpsys/stimulus-modal-window';
 

@@ -2,7 +2,6 @@ import { Controller } from '@hotwired/stimulus';
 import { elCreate } from '@dpsys/js-utils/el';
 import { pause } from '@dpsys/js-utils/misc';
 
-
 enum State 
 {
     OPENING = 'OPENING',
@@ -10,7 +9,6 @@ enum State
     CLOSING = 'CLOSING',
     CLOSED = 'CLOSED',
 };
-
 
 export default class ModalWindow extends Controller<HTMLElement> 
 {
@@ -29,9 +27,9 @@ export default class ModalWindow extends Controller<HTMLElement>
     declare openerValue: string;
     declare clickOutsideIgnoreValue: string[];
 
-    opener : HTMLElement|null = null;
-    content : HTMLElement|null = null;
-    closer : HTMLElement|null = null;
+    opener: HTMLElement | null = null;
+    content: HTMLElement | null = null;
+    closer: HTMLElement | null = null;
 
     override connect()
     {
@@ -44,11 +42,11 @@ export default class ModalWindow extends Controller<HTMLElement>
             this.element.appendChild(el_content);
 
             // Move user specified contents into content container 
-            [...this.element.children].forEach( (el) =>
+            [...this.element.children].forEach((el) =>
             {
-                if (el.classList.contains('modal_window_content') || el.classList.contains('modal_window_closer')) {return;}
+                if (el.classList.contains('modal_window_content') || el.classList.contains('modal_window_closer')) return;
                 el_content.appendChild(el);
-            })
+            });
         }
         this.content = el_content;
 
@@ -78,18 +76,34 @@ export default class ModalWindow extends Controller<HTMLElement>
         document.addEventListener('click', this.clickOutside);
     }
 
-    handleOpenerClick = (e : Event) : void =>
+    override disconnect()
     {
-        let el_opener = (e.target as HTMLElement).closest(this.openerValue) as HTMLElement; if (!el_opener) {return;}
+        if (this.closer)
+        {
+            this.closer.removeEventListener('click', this.close);
+        }
+
+        if (this.openerValue)
+        {
+            document.removeEventListener('click', this.handleOpenerClick);
+        }
+
+        document.removeEventListener('click', this.clickOutside);
+    }
+
+    handleOpenerClick = (e: Event): void =>
+    {
+        let el_opener = (e.target as HTMLElement).closest(this.openerValue) as HTMLElement;
+        if (!el_opener) return;
         this.opener = el_opener;
         this.open();
     }
     
-    open = async () : Promise<void> =>
-	{        
-		if (this.stateValue === State.OPENED) {return;}
-					
-		if ((this as any).openBeforeCallback instanceof Function)
+    open = async (): Promise<void> =>
+    {        
+        if (this.stateValue === State.OPENED) return;
+                    
+        if ((this as any).openBeforeCallback instanceof Function)
         {
             console.warn('[StimulusModalWindow] ⚠️ openBeforeCallback() is deprecated and will be removed in the next minor release. Use openBefore() instead.');
             await (this as any).openBeforeCallback();
@@ -99,37 +113,35 @@ export default class ModalWindow extends Controller<HTMLElement>
             await (this as any).openBefore();
         }
 
-		this.stateValue = State.OPENING;
+        this.stateValue = State.OPENING;
         this.element.classList.add('opening');
-		this.element.style.visibility = 'visible';
-					
-		setTimeout( async ()=> 
-		{
-			this.stateValue = State.OPENED;
+        this.element.style.visibility = 'visible';
+                    
+        setTimeout(async () => 
+        {
+            this.stateValue = State.OPENED;
             this.element.classList.add('opened');
             this.element.classList.remove('closed');   
             this.element.classList.remove('opening');
 
             if ((this as any).openAfterCallback instanceof Function)
             {
-                console.warn('[StimulusModalWindow] ⚠️ openAfterCallback() is deprecated and will be removed in the next minor release. Use openAfter() instead.')
+                console.warn('[StimulusModalWindow] ⚠️ openAfterCallback() is deprecated and will be removed in the next minor release. Use openAfter() instead.');
                 await (this as any).openAfterCallback();
             }
             else if ((this as any).openAfter instanceof Function)
             {
                 await (this as any).openAfter();
             }
-		}
-		, this.openDurationMsValue);
-	}
+        }, this.openDurationMsValue);
+    }
 
-    close = async () : Promise<void> =>
-	{																		
-		if ( this.stateValue === State.CLOSED ) {return;}					
-				
+    close = async (): Promise<void> =>
+    {
+        if (this.stateValue === State.CLOSED) return;
         if ((this as any).closeBeforeCallback instanceof Function)
         {
-            console.warn('[StimulusModalWindow] ⚠️ closeBeforeCallback() is deprecated and will be removed in the next minor release. Use closeBefore() instead.')
+            console.warn('[StimulusModalWindow] ⚠️ closeBeforeCallback() is deprecated and will be removed in the next minor release. Use closeBefore() instead.');
             await (this as any).closeBeforeCallback();
         }
         else if ((this as any).closeBefore instanceof Function)
@@ -137,40 +149,41 @@ export default class ModalWindow extends Controller<HTMLElement>
             await (this as any).closeBefore();
         }
 
-		this.stateValue = State.CLOSING;
+        this.stateValue = State.CLOSING;
         this.element.classList.add('closing');
-		
-		await pause(this.closeDurationMsValue);
-	
-		this.stateValue = State.CLOSED;
+        
+        await pause(this.closeDurationMsValue);
+    
+        this.stateValue = State.CLOSED;
         this.element.classList.add('closed');   
         this.element.classList.remove('opened');
         this.element.classList.remove('closing');
-		this.element.style.visibility = '';
+        this.element.style.visibility = '';
 
         if ((this as any).closeAfterCallback instanceof Function)
         {
-            console.warn('[StimulusModalWindow] ⚠️ closeAfterCallback() is deprecated and will be removed in the next minor release. Use closeAfter() instead.')
+            console.warn('[StimulusModalWindow] ⚠️ closeAfterCallback() is deprecated and will be removed in the next minor release. Use closeAfter() instead.');
             await (this as any).closeAfterCallback();
         }
         else if ((this as any).closeAfter instanceof Function)
         {
             await (this as any).closeAfter();
         }
-	}
+    }
 
-    clickOutside = (e : Event) : void =>
-	{
+    clickOutside = (e: Event): void =>
+    {
         // Ignore closest element if specified
-        var ignoreClosestFound = false;
-        this.clickOutsideIgnoreValue.forEach( (ignoreCssSel)=>
-        {						
-            if ((e.target as HTMLElement).closest(ignoreCssSel)) {ignoreClosestFound = true;}
+        let ignoreClosestFound = false;
+        this.clickOutsideIgnoreValue.forEach((ignoreCssSel) =>
+        {
+            if ((e.target as HTMLElement).closest(ignoreCssSel)) ignoreClosestFound = true;
         });
-        if (ignoreClosestFound) {return;}
 
-		var isClickInside = this.element.contains(e.target as HTMLElement);
-		
-		if ( this.stateValue === State.OPENED  &&  !isClickInside ) {this.close();}
-	}	
+        if (ignoreClosestFound) return;
+
+        let isClickInside = this.element.contains(e.target as HTMLElement);
+        
+        if (this.stateValue === State.OPENED && !isClickInside) this.close();
+    }   
 }
