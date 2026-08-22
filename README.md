@@ -56,11 +56,6 @@ export default class extends ModalWindow
 		...
 	}
 
-	async customMethodOne()
-	{	
-        ...															
-	}
-
 	async openBefore()
 	{
 		alert('The window is going to open');
