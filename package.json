@@ -1,6 +1,6 @@
 {
   "name": "@dpsys/stimulus-modal-window",
-  "version": "1.4.8",
+  "version": "1.4.9",
   "description": "Custom modal windows for Stimulus framework",
   "keywords": [
     "modal-window",
