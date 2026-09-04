@@ -123,13 +123,27 @@ Do something after the window finishes closing
 
 
 ## Styling
+
+### Opening, closing
+#### Vanilla CSS
 ``` css
 .modal_window.closed {opacity: 0; transition: opacity 0.5s ease-in;}
-.modal_window.opening {opacity: 1;}
+.modal_window.closed.opening {opacity: 1;}
+.modal_window.opened {opacity: 1; transition: opacity 0.3s ease-out;}
+.modal_window.opened.closing {opacity: 0;}
 
-.modal_window.opened {opacity: 1; transition: opacity 0.5s ease-out;}
-.modal_window.closing {opacity: 0;}
+```
 
+#### Tailwind CSS
+``` html
+<div class="modal_window ...
+    [&.closed]:opacity-0 [&.closed]:[transition:opacity_0.5s_ease-in]
+    [&.closed.opening]:opacity-100
+    [&.opened]:opacity-100 [&.opened]:[transition:opacity_0.3s_ease-out]
+    [&.opened.closing]:opacity-0" 
+    ... >
+    ...
+</div>
 ```
 
 
