@@ -28,7 +28,7 @@ This example uses Symfony, Twig and Tailwind. Use your own implementation if nee
 ``` twig
 <button class="main" data-mw-opener-something>Open window</button> {# Name of data attribute can be anything. E.g.: data-foo-bar  #}
 
-<div class="modal_window top-[15vh] right-[25vw]" {{ stimulus_controller('modal-window', {opener: '[data-mw-opener-something]'}) }}>
+<div class="modal_window absolute top-10 left-10" {{ stimulus_controller('modal-window', {opener: '[data-mw-opener-something]'}) }}>
 
     <div class="modal_window_closer">X</div> {# Optional. Specify if needed. #}
 
@@ -152,4 +152,4 @@ Do something after the window finishes closing
 ### Flash of unstyled content on page load
 Add `modal_window` class to the main element:
 
-`<div class="`**`modal_window`**` top-[15vh] right-[25vw]" {{ stimulus_controller('modal-window', ...) }}>`
+`<div class="`**`modal_window`**` absolute top-10 left-10" {{ stimulus_controller('modal-window', ...) }}>`
